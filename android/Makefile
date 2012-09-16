@@ -2,7 +2,7 @@
 NDK=/tmp/android-ndk-r7
 NDKDEST=/tmp/ndk
 NDKPLATFORM=android-5
-ANDROIDDEST=/sdcard/opt/nmap-5.61TEST4
+ANDROIDDEST=/sdcard/opt/nmap-6.01
 
 OPENSSLOPT=
 # uncomment if you want openssl support and you have compiled OpenSSL already
@@ -11,6 +11,10 @@ OPENSSLOPT=
 # only used for download and automatic extraction (getndk)
 TMPNDK=/tmp/ndk.tar.bz2
 TMPDIREXTRACT=/tmp
+
+# Twese two usually works
+HOSTPARM="--host=arm-linux"
+# HOSTPARM="--host=arm-linux-androideabi"
 
 NDKCP=$(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST)
 NDKURL="http://dl.google.com/android/ndk/android-ndk-r5b-linux-x86.tar.bz2"
@@ -40,7 +44,7 @@ build: | configure compile
 	@echo "Type 'build' successfuly built"
 
 configure:
-	cd .. && PATH=$(NDKDEST)/bin:$(PATH) LUA_CFLAGS="-DLUA_USE_POSIX" LDFLAGS="-static" ac_cv_linux_vers=2 CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ LD=arm-linux-androideabi-ld RANLIB=arm-linux-androideabi-ranlib AR=arm-linux-androideabi-ar ./configure --host=arm-linux-androideabi --without-zenmap --with-liblua=included --with-libpcap=internal --with-pcap=linux --enable-static --prefix=$(ANDROIDDEST) $(OPENSSLOPT)
+	cd .. && PATH=$(NDKDEST)/bin:$(PATH) LUA_CFLAGS="-DLUA_USE_POSIX" LDFLAGS="-static" ac_cv_linux_vers=2 CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ LD=arm-linux-androideabi-ld RANLIB=arm-linux-androideabi-ranlib AR=arm-linux-androideabi-ar STRIP=arm-linux-androideabi-strip ./configure $(HOSTPARM) --without-zenmap --with-liblua=included --with-libpcap=internal --with-pcap=linux --enable-static --prefix=$(ANDROIDDEST) $(OPENSSLOPT)
 
 compile:
 	cd .. && PATH=$(NDKDEST)/bin:$(PATH) make
