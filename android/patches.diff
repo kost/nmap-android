@@ -1,25 +1,35 @@
-diff -ur nmap-and.orig/liblua/llex.c nmap-and/liblua/llex.c
---- nmap-and.orig/liblua/llex.c	2011-02-15 22:09:22.142710542 +0100
-+++ nmap-and/liblua/llex.c	2011-02-15 22:11:50.442710540 +0100
-@@ -176,9 +176,13 @@
+diff -ur nmap-6.25/configure nmap-6.25.mod/configure
+--- nmap-6.25/configure	2012-11-16 01:54:16.000000000 +0100
++++ nmap-6.25.mod/configure	2012-12-02 23:03:10.085399648 +0100
+@@ -4500,7 +4500,7 @@
  
+ needs_cpp_precomp=no
+ 
+-LUA_CFLAGS="-DLUA_USE_POSIX -DLUA_USE_DLOPEN"
++LUA_CFLAGS="-DLUA_USE_POSIX"
+ 
+ case "$host" in
+   *alpha-dec-osf*)
+Only in nmap-6.25.mod/: configure.orig
+diff -ur nmap-6.25/liblua/llex.c nmap-6.25.mod/liblua/llex.c
+--- nmap-6.25/liblua/llex.c	2012-06-16 08:02:57.000000000 +0200
++++ nmap-6.25.mod/liblua/llex.c	2012-12-02 23:03:43.303360329 +0100
+@@ -211,7 +211,11 @@
+ */
  static void trydecpoint (LexState *ls, SemInfo *seminfo) {
-   /* format error: try to update decimal point separator */
--  struct lconv *cv = localeconv();
    char old = ls->decpoint;
 +#ifdef __ANDROID__
 +  ls->decpoint = '.';
 +#else
-+  struct lconv *cv = localeconv();
-   ls->decpoint = (cv ? cv->decimal_point[0] : '.');
+   ls->decpoint = getlocaledecpoint();
 +#endif
-   buffreplace(ls, old, ls->decpoint);  /* try updated decimal separator */
-   if (!luaO_str2d(luaZ_buffer(ls->buff), &seminfo->r)) {
+   buffreplace(ls, old, ls->decpoint);  /* try new decimal separator */
+   if (!buff2d(ls->buff, &seminfo->r)) {
      /* format error with correct decimal point: no more options */
-diff -ur nmap-and.orig/nping/nping.h nmap-and/nping/nping.h
---- nmap-and.orig/nping/nping.h	2011-02-15 22:10:13.502710541 +0100
-+++ nmap-and/nping/nping.h	2011-02-15 22:14:35.934710551 +0100
-@@ -112,7 +112,7 @@
+diff -ur nmap-6.25/nping/nping.h nmap-6.25.mod/nping/nping.h
+--- nmap-6.25/nping/nping.h	2012-11-29 20:12:35.000000000 +0100
++++ nmap-6.25.mod/nping/nping.h	2012-12-02 23:03:10.069400630 +0100
+@@ -116,7 +116,7 @@
      #endif /* WIN32 */
  #endif /* HAVE_CONFIG_H */
  
@@ -28,15 +38,4 @@ diff -ur nmap-and.orig/nping/nping.h nmap-and/nping/nping.h
      #include <sysexits.h>
  #endif
  
-diff -urN nmap-5.61TEST4.orig//configure nmap-5.61TEST4/configure
- --- nmap-5.61TEST4.orig//configure	2011-12-19 06:16:20.000000000 +0100
- +++ nmap-5.61TEST4/configure	2012-01-10 06:52:40.189167371 +0100
- @@ -4494,7 +4494,7 @@
-  
-  needs_cpp_precomp=no
-  
- -LUA_CFLAGS="-DLUA_USE_POSIX -DLUA_USE_DLOPEN"
- +LUA_CFLAGS="-DLUA_USE_POSIX"
-  
-  case "$host" in
-    *alpha-dec-osf*)
+Only in nmap-6.25.mod/nping: nping.h.orig

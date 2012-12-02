@@ -2,7 +2,7 @@
 NDK=/tmp/android-ndk-r7
 NDKDEST=/tmp/ndk
 NDKPLATFORM=android-5
-ANDROIDDEST=/sdcard/opt/nmap-6.01
+ANDROIDDEST=/sdcard/opt/nmap-6.25
 
 OPENSSLOPT=
 # uncomment if you want openssl support and you have compiled OpenSSL already
