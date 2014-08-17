@@ -1,8 +1,8 @@
 # edit line below if you have NDK to reflect the path where NDK is installed
-NDK=/tmp/android-ndk-r7
+NDK=/tmp/android-ndk-r10 
 NDKDEST=/tmp/ndk
 NDKPLATFORM=android-5
-ANDROIDDEST=/sdcard/opt/nmap-6.25
+ANDROIDDEST=/sdcard/opt/nmap-6.46
 
 OPENSSLOPT=
 # uncomment if you want openssl support and you have compiled OpenSSL already
@@ -17,7 +17,7 @@ HOSTPARM="--host=arm-linux"
 # HOSTPARM="--host=arm-linux-androideabi"
 
 NDKCP=$(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST)
-NDKURL="http://dl.google.com/android/ndk/android-ndk-r5b-linux-x86.tar.bz2"
+NDKURL="http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2"
 
 all: 
 	@echo "Type 'make doit' to automatically download Android NDK and build"
