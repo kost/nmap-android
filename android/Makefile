@@ -1,22 +1,26 @@
+# Twese two usually works
+HOSTARCH?="arm"
+HOSTPARM="--host=arm-linux"
+# HOSTPARM="--host=arm-linux-androideabi"
+#PREFIXT="mipsel-linux-android"
+#PREFIXT="i686-linux-android"
+PREFIXT?="arm-linux-androideabi"
 # edit line below if you have NDK to reflect the path where NDK is installed
-NDK=/tmp/android-ndk-r10 
-NDKDEST=/tmp/ndk
-NDKPLATFORM=android-5
-ANDROIDDEST=/sdcard/opt/nmap-6.46
+NDK=/tmp/android-ndk-r10d
+NDKDEST=/tmp/ndk-$(HOSTARCH)
+NDKPLATFORM?=android-9
+ANDROIDDEST=/sdcard/opt/nmap-6.47
 
 OPENSSLOPT=
 # uncomment if you want openssl support and you have compiled OpenSSL already
-# OPENSSLOPT="--with-openssl=/sd-ext/opt/openssl"
+# OPENSSLOPT="--with-openssl=/sdcard/opt/openssl"
 
 # only used for download and automatic extraction (getndk)
 TMPNDK=/tmp/ndk.tar.bz2
 TMPDIREXTRACT=/tmp
 
-# Twese two usually works
-HOSTPARM="--host=arm-linux"
-# HOSTPARM="--host=arm-linux-androideabi"
 
-NDKCP=$(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST)
+NDKCP=bash $(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST) --arch=$(HOSTARCH)
 NDKURL="http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2"
 
 all: 
@@ -44,7 +48,7 @@ build: | configure compile
 	@echo "Type 'build' successfuly built"
 
 configure:
-	cd .. && PATH=$(NDKDEST)/bin:$(PATH) LUA_CFLAGS="-DLUA_USE_POSIX" LDFLAGS="-static" ac_cv_linux_vers=2 CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ LD=arm-linux-androideabi-ld RANLIB=arm-linux-androideabi-ranlib AR=arm-linux-androideabi-ar STRIP=arm-linux-androideabi-strip ./configure $(HOSTPARM) --without-zenmap --with-liblua=included --with-libpcap=internal --with-pcap=linux --enable-static --prefix=$(ANDROIDDEST) $(OPENSSLOPT)
+	cd .. && PATH=$(NDKDEST)/bin:$(PATH) LUA_CFLAGS="-DLUA_USE_POSIX" LDFLAGS="-static" ac_cv_linux_vers=2 CC=$(PREFIXT)-gcc CXX=$(PREFIXT)-g++ LD=$(PREFIXT)-ld RANLIB=$(PREFIXT)-ranlib AR=$(PREFIXT)-ar STRIP=$(PREFIXT)-strip ./configure $(HOSTPARM) --without-zenmap --with-liblua=included --with-libpcap=internal --with-pcap=linux --enable-static --prefix=$(ANDROIDDEST) $(OPENSSLOPT)
 
 compile:
 	cd .. && PATH=$(NDKDEST)/bin:$(PATH) make
