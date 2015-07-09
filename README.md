@@ -20,3 +20,12 @@ Transfer binaries and supporting files to android (adb, wireless, ...)
 
 Have fun!
 
+
+### NDK Custom builds
+
+In case you already have NDK and you already have NDK copied:
+
+```
+make NDK=/data/opt/android-ndk-r10d NDKDEST=/data/opt/ndk-arm OPENSSL=1 openssl build install strip
+```
+
