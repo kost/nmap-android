@@ -18,6 +18,8 @@ OPENSSLVER?=openssl-1.0.2c
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/openssl
 OPENSSLOPT?="--with-openssl=$(OPENSSLDIR)"
+else
+OPENSSLOPT?=""
 endif
 
 # only used for download and automatic extraction (getndk)
