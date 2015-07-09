@@ -1,0 +1,14 @@
+diff -urN nmap-6.49BETA4/libpcap/pcap-linux.c nmap-6.49BETA4.mod/libpcap/pcap-linux.c
+--- nmap-6.49BETA4/libpcap/pcap-linux.c	2015-05-01 22:24:47.000000000 +0200
++++ nmap-6.49BETA4.mod/libpcap/pcap-linux.c	2015-07-10 00:20:39.426801303 +0200
+@@ -230,6 +230,10 @@
+ #include <linux/wireless.h>
+ #endif /* HAVE_LINUX_WIRELESS_H */
+ 
++#if defined(__ANDROID__) || defined(ANDROID)
++#undef IW_MODE_MONITOR
++#endif
++
+ /*
+  * Got libnl?
+  */

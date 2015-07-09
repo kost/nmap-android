@@ -14,7 +14,7 @@ NDKPLATFORM?=android-9
 ANDROIDDEST?=/sdcard/opt/nmap-6.47
 
 ifdef OPENSSL
-OPENSSLVER?=openssl-1.0.2c
+OPENSSLVER?=openssl-1.0.2d
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/$(OPENSSLVER)
 OPENSSLOPT?="--with-openssl=$(OPENSSLDIR)"
@@ -28,7 +28,6 @@ TMPDIREXTRACT=/tmp
 
 NDKCP=bash $(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST) --arch=$(HOSTARCH)
 NDKURL="http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2"
-
 
 all:
 	@echo "Type 'make doit' to automatically download Android NDK and build"
