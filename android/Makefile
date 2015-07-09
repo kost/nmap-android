@@ -13,6 +13,8 @@ NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKPLATFORM?=android-9
 ANDROIDDEST?=/sdcard/opt/nmap-6.47
 
+OPENSSLVER?=openssl-1.0.1o
+OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/openssl
 # uncomment if you want openssl support and you have compiled OpenSSL already
 # OPENSSLOPT?="--with-openssl=/sd-ext/opt/openssl"
@@ -23,11 +25,9 @@ OPENSSLOPT?=
 TMPNDK=/tmp/ndk.tar.bz2
 TMPDIREXTRACT=/tmp
 
-
 NDKCP=bash $(NDK)/build/tools/make-standalone-toolchain.sh --platform=$(NDKPLATFORM) --install-dir=$(NDKDEST) --arch=$(HOSTARCH)
 NDKURL="http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2"
-OPENSSLVER="openssl-1.0.1o"
-OPENSSLURL="https://openssl.org/source/openssl-1.0.1o.tar.gz"
+
 
 all:
 	@echo "Type 'make doit' to automatically download Android NDK and build"
@@ -42,12 +42,10 @@ cpndk:
 	$(NDKCP)
 
 openssl: 
-	cd .. && cd .. && wget $(OPENSSLURL) 
-	tar xvjf $(OPENSSLVER).tar.gz
-	cd $(OPENSSLVER)
-	PATH=$(NDKDEST)/bin:$(PATH) CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" ./Configure dist --prefix=$(OPENSSLDIR)
-	PATH=$(NDKDEST)/bin:$(PATH) make CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" 
-	make install
+	cd ../.. && wget $(OPENSSLURL) && tar xvzf $(OPENSSLVER).tar.gz
+	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" ./Configure dist --prefix=$(OPENSSLDIR)
+	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" 
+	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make install
 	
 patch:
 	-cd .. && for patchfile in android/patches/*.diff; do echo processing patch $$patchfile; patch -N -p1 < $$patchfile ; done
