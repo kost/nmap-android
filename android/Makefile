@@ -16,7 +16,7 @@ ANDROIDDEST?=/sdcard/opt/nmap-6.47
 ifdef OPENSSL
 OPENSSLVER?=openssl-1.0.2c
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
-OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/openssl
+OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/$(OPENSSLVER)
 OPENSSLOPT?="--with-openssl=$(OPENSSLDIR)"
 else
 OPENSSLOPT?=""
@@ -44,7 +44,7 @@ cpndk:
 	$(NDKCP)
 
 openssl: 
-	cd ../.. && wget $(OPENSSLURL) && tar xvzf $(OPENSSLVER).tar.gz
+	cd ../.. && wget -nc $(OPENSSLURL) && tar xvzf $(OPENSSLVER).tar.gz
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" ./Configure dist --prefix=$(OPENSSLDIR)
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" 
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make install
