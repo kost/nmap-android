@@ -13,7 +13,7 @@ NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKPLATFORM?=android-9
 ANDROIDDEST?=/sdcard/opt/nmap-6.47
 
-OPENSSLVER?=openssl-1.0.1o
+OPENSSLVER?=openssl-1.0.2c
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/openssl
 # uncomment if you want openssl support and you have compiled OpenSSL already
