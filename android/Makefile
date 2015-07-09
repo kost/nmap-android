@@ -42,7 +42,7 @@ patch:
 	-cd .. && for patchfile in android/patches/*.diff; do echo processing patch $$patchfile; patch -N -p1 < $$patchfile ; done
 
 unpatch:
-	-cd .. && patch -R -p1 < android/patches.diff
+	-cd .. && for patchfile in android/patches/*.diff; do echo reversing patch $$patchfile; patch -R -p1 < $$patchfile ; done
 
 havendk: | cpndk patch build
 	@echo "Type 'havendk' successfuly built"
