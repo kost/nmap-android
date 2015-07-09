@@ -8,8 +8,8 @@ PREFIXT?="arm-linux-androideabi"
 # edit line below if you have NDK to reflect the path where NDK is installed
 #NDK=/data/opt/android-ndk-r10d
 #NDKDEST=/data/opt/ndk-$(HOSTARCH)
-NDK=/tmp/android-ndk-r10d
-NDKDEST=/tmp/ndk-$(HOSTARCH)
+NDK?=/tmp/android-ndk-r10d
+NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKPLATFORM?=android-9
 ANDROIDDEST?=/sdcard/opt/nmap-6.47
 
