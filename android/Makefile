@@ -56,6 +56,9 @@ configure:
 install:
 	cd .. && PATH=$(NDKDEST)/bin:$(PATH) make install
 
+strip: install
+	-cd .. && PATH=$(NDKDEST)/bin:$(PATH) $(PREFIXT)-strip $(ANDROIDDEST)/bin/*
+
 compile:
 	cd .. && PATH=$(NDKDEST)/bin:$(PATH) make
 
