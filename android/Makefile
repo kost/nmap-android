@@ -38,6 +38,7 @@ doit: | getndk havendk
 
 getndk:
 	wget $(NDKURL) -O $(TMPNDK) && cd $(TMPDIREXTRACT) && tar xvjf $(TMPNDK)
+
 cpndk:
 	$(NDKCP)
 
