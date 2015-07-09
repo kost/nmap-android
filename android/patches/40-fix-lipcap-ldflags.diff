@@ -1,0 +1,12 @@
+diff -ru nmap-6.46/libpcap/Makefile.in nmap-6.46.mod/libpcap/Makefile.in
+--- nmap-6.46/libpcap/Makefile.in	2012-04-10 02:47:45.000000000 +0200
++++ nmap-6.46.mod/libpcap/Makefile.in	2014-08-17 06:46:09.425260659 +0200
+@@ -54,7 +54,7 @@
+ ADDLARCHIVEOBJS = @ADDLARCHIVEOBJS@
+ LIBS = @LIBS@
+ CFLAGS = @CFLAGS@
+-LDFLAGS = @LDFLAGS@
++# LDFLAGS = @LDFLAGS@
+ DYEXT = @DYEXT@
+ V_RPATH_OPT = @V_RPATH_OPT@
+ PROG=libpcap

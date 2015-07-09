@@ -39,7 +39,7 @@ cpndk:
 	$(NDKCP)
 
 patch:
-	-cd .. && patch -N -p1 < android/patches.diff
+	-cd .. && for patchfile in android/patches/*.diff; do echo processing patch $$patchfile; patch -N -p1 < $$patchfile ; done
 
 unpatch:
 	-cd .. && patch -R -p1 < android/patches.diff
