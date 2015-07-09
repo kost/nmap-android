@@ -13,13 +13,12 @@ NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKPLATFORM?=android-9
 ANDROIDDEST?=/sdcard/opt/nmap-6.47
 
+ifdef OPENSSL
 OPENSSLVER?=openssl-1.0.2c
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/openssl
-# uncomment if you want openssl support and you have compiled OpenSSL already
-# OPENSSLOPT?="--with-openssl=/sd-ext/opt/openssl"
-# OPENSSLOPT?="--with-openssl=/sdcard/opt-$(HOSTARCH)/openssl"
-OPENSSLOPT?=
+OPENSSLOPT?="--with-openssl=$(OPENSSLDIR)"
+endif
 
 # only used for download and automatic extraction (getndk)
 TMPNDK=/tmp/ndk.tar.bz2
