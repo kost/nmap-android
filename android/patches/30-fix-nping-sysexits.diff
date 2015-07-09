@@ -6,7 +6,7 @@ diff -ur nmap-6.46/nping/nping.h nmap-6.46.mod/nping/nping.h
  #endif /* HAVE_CONFIG_H */
  
 -#ifndef WIN32
-+#ifndef __ANDROID__
++#if !defined(__ANDROID__) || !defined(WIN32)
      #include <sysexits.h>
  #endif
  
