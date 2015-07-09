@@ -58,6 +58,7 @@ install:
 
 strip: install
 	-cd .. && PATH=$(NDKDEST)/bin:$(PATH) $(PREFIXT)-strip $(ANDROIDDEST)/bin/*
+	echo "Success (ignore any strip errors!)"
 
 compile:
 	cd .. && PATH=$(NDKDEST)/bin:$(PATH) make
