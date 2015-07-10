@@ -43,6 +43,7 @@ cpndk:
 openssl: 
 	cd ../.. && wget -nc $(OPENSSLURL) && tar xvzf $(OPENSSLVER).tar.gz
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" ./Configure dist --prefix=$(OPENSSLDIR)
+	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make clean
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make CC=$(PREFIXT)-gcc AR="$(PREFIXT)-ar r" RANLIB=$(PREFIXT)-ranlib LDFLAGS="-static" 
 	cd ../../$(OPENSSLVER) && PATH=$(NDKDEST)/bin:$(PATH) make install
 	
