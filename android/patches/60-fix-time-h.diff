@@ -1,0 +1,56 @@
+diff -ur nmap-7.12/nmap_error.cc nmap-7.12.mod/nmap_error.cc
+--- nmap-7.12/nmap_error.cc	2015-07-01 23:25:39.000000000 +0200
++++ nmap-7.12.mod/nmap_error.cc	2016-06-26 22:00:07.154850539 +0200
+@@ -128,6 +128,7 @@
+ #include "xml.h"
+ 
+ #include <errno.h>
++#include <time.h>
+ 
+ extern NmapOps o;
+ 
+diff -ur nmap-7.12/nping/EchoServer.cc nmap-7.12.mod/nping/EchoServer.cc
+--- nmap-7.12/nping/EchoServer.cc	2015-06-27 10:21:53.000000000 +0200
++++ nmap-7.12.mod/nping/EchoServer.cc	2016-06-26 22:06:11.570843103 +0200
+@@ -130,6 +130,7 @@
+ #include "NpingOps.h"
+ #include "ProbeMode.h"
+ #include <signal.h>
++#include <time.h>
+ 
+ extern NpingOps o;
+ extern EchoServer es;
+diff -ur nmap-7.12/osscan2.cc nmap-7.12.mod/osscan2.cc
+--- nmap-7.12/osscan2.cc	2016-01-13 21:53:39.000000000 +0100
++++ nmap-7.12.mod/osscan2.cc	2016-06-26 22:01:30.438848840 +0200
+@@ -138,6 +138,7 @@
+ 
+ #include <list>
+ #include <math.h>
++#include <time.h>
+ 
+ extern NmapOps o;
+ 
+diff -ur nmap-7.12/osscan.cc nmap-7.12.mod/osscan.cc
+--- nmap-7.12/osscan.cc	2015-11-05 21:41:05.000000000 +0100
++++ nmap-7.12.mod/osscan.cc	2016-06-26 22:05:09.634844367 +0200
+@@ -135,6 +135,7 @@
+ 
+ #include <errno.h>
+ #include <stdarg.h>
++# include <time.h>
+ #if TIME_WITH_SYS_TIME
+ # include <sys/time.h>
+ # include <time.h>
+diff -ur nmap-7.12/service_scan.cc nmap-7.12.mod/service_scan.cc
+--- nmap-7.12/service_scan.cc	2016-03-05 00:04:01.000000000 +0100
++++ nmap-7.12.mod/service_scan.cc	2016-06-28 10:39:14.971841468 +0200
+@@ -159,6 +159,8 @@
+ # endif
+ #endif
+ 
++#include <time.h>
++
+ #include <algorithm>
+ #include <list>
+ 
