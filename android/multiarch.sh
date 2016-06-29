@@ -84,11 +84,17 @@ do
 		exit 1
 	fi
 
-	echo "Copying data"
+	for binary in nmap nping ncat
+	do
+		android-elf-cleaner $ANDROIDDIR/$ANDROIDNMAP/bin/$binary
+	done
 
+	echo "Copying data"
 	cd $ANDROIDDIR/$ANDROIDNMAP
 
-	cp -a bin/ /tmp/$ANDROIDNMAP-$arch
+	# debug	
+	# cp -a bin/ /tmp/$ANDROIDNMAP-$arch
+
 	# PATH=$NDKARCHPATH/bin:$PATH $TPREFIXT-strip bin/*
 	cd bin
 	zip -9 ../../$ANDROIDNMAP-binaries-$ARCHZIP.zip * 
