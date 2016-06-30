@@ -18,6 +18,13 @@ make havendk NDK=/opt/android-ndk-r12b
 
 Transfer binaries and supporting files to android (adb, wireless, ...)
 
+
+### OpenSSL support
+
+```
+make openssl havendk OPENSSL=1 NDK=/opt/android-ndk-r12b
+```
+
 Have fun!
 
 
@@ -26,6 +33,6 @@ Have fun!
 In case you already have NDK and you already have NDK copied:
 
 ```
-make NDK=/data/opt/android-ndk-r10d NDKDEST=/data/opt/ndk-arm OPENSSL=1 openssl build install strip
+make NDK=/data/opt/android-ndk-r12b NDKDEST=/data/opt/ndk-arm OPENSSL=1 openssl build install strip
 ```
 
