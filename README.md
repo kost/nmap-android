@@ -13,7 +13,7 @@ make doit
 Or if you have Android NDK already, just specify NDK location and
 issue following command:
 ```
-make havendk NDK=/opt/android-ndk-r10d
+make havendk NDK=/opt/android-ndk-r12b
 ```
 
 Transfer binaries and supporting files to android (adb, wireless, ...)
