@@ -16,6 +16,7 @@ echo "Patching..."
 echo "Starting Building for each arch"
 #for arch in arm
 #for arch in arm mipsel i686
+# for arch in mips64el aarch64 x86_64
 for arch in arm mipsel i686 aarch64 mips64el x86_64
 do
 	echo "Building for $arch"
@@ -23,6 +24,7 @@ do
 	OPENSSLLDFLAGS="-static"
 	NDKLEVEL=$NDK32LEVEL
 	NDKPLATFORM=$arch
+	SYMBOLREMOVE=yes
 	if [ "$arch" = "arm" ]
 	then
 		THOSTPARM="--host=$arch-linux-androideabi"
@@ -32,9 +34,10 @@ do
 	then
 		THOSTPARM="--host=$arch-linux-android"
 		TPREFIXT="$arch-linux-android"
-		ARCHZIP="aarch64"
+		ARCHZIP="arm64-v8a"
 		NDKPLATFORM=arm64
 		NDKLEVEL=$NDK64LEVEL
+		SYMBOLREMOVE=no
 	elif [ "$arch" = "mipsel" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -48,6 +51,7 @@ do
 		ARCHZIP="mips64el"
 		NDKPLATFORM=mips64
 		NDKLEVEL=$NDK64LEVEL
+		SYMBOLREMOVE=no
 	elif [ "$arch" = "i686" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -62,6 +66,7 @@ do
 		OPENSSLPLATFORM=linux-x86_64
 		OPENSSLLDFLAGS=
 		NDKLEVEL=$NDK64LEVEL
+		SYMBOLREMOVE=no
 	else
 		THOSTPARM="--host=$arch-linux-android"
 		TPREFIXT="$arch-linux-android"
@@ -84,10 +89,14 @@ do
 		exit 1
 	fi
 
-	for binary in nmap nping ncat
-	do
-		android-elf-cleaner $ANDROIDDIR/$ANDROIDNMAP/bin/$binary
-	done
+	if [ "$SYMBOLREMOVE" = "yes" ]; then
+		for binary in nmap nping ncat
+		do
+			android-elf-cleaner $ANDROIDDIR/$ANDROIDNMAP/bin/$binary
+		done
+	else
+		echo "[i] Not removing ELF symbols"
+	fi
 
 	echo "Copying data"
 	cd $ANDROIDDIR/$ANDROIDNMAP
