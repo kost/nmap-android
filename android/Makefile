@@ -10,7 +10,7 @@ NDK?=/tmp/android-ndk-r12b
 NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKLEVEL?=9
 NDKPLATFORM?=android-$(NDKLEVEL)
-ANDROIDDEST?=/sdcard/opt/nmap-7.12
+ANDROIDDEST?=/sdcard/opt/nmap-7.25BETA1
 OPENSSLPLATFORM?=dist
 OPENSSLLDFLAGS?="-static"
 

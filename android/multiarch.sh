@@ -3,7 +3,7 @@
 set -x
 
 ANDROIDDIR=/sdcard/opt
-ANDROIDNMAP=nmap-7.12
+ANDROIDNMAP=nmap-7.25BETA1
 NDKARCHPPREFIX=/data/opt/ndk
 NDKPATH=/data/opt/android-ndk-r12b
 CURDIR=`pwd`
