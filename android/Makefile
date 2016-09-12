@@ -61,9 +61,6 @@ unpatch:
 havendk: | cpndk patch build
 	@echo "Type 'havendk' successfuly built"
 
-havendk: | cpndk patch build
-	@echo "Type 'havendk' successfuly built"
-
 build: | configure compile
 	@echo "Type 'build' successfuly built"
 
