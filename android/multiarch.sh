@@ -3,11 +3,11 @@
 set -x
 
 ANDROIDDIR=/sdcard/opt
-ANDROIDNMAP=nmap-7.25BETA1
+ANDROIDNMAP=nmap-7.25BETA2
 NDKARCHPPREFIX=/data/opt/ndk
 NDKPATH=/data/opt/android-ndk-r12b
 CURDIR=`pwd`
-NDK32LEVEL=9
+NDK32LEVEL=21
 NDK64LEVEL=21
 
 echo "Patching..."
@@ -24,7 +24,7 @@ do
 	OPENSSLLDFLAGS="-static"
 	NDKLEVEL=$NDK32LEVEL
 	NDKPLATFORM=$arch
-	SYMBOLREMOVE=yes
+	SYMBOLREMOVE=no
 	if [ "$arch" = "arm" ]
 	then
 		THOSTPARM="--host=$arch-linux-androideabi"
