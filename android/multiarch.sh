@@ -24,7 +24,7 @@ do
 	OPENSSLLDFLAGS="-static"
 	NDKLEVEL=$NDK32LEVEL
 	NDKPLATFORM=$arch
-	SYMBOLREMOVE=no
+	SYMBOLREMOVE=yes
 	if [ "$arch" = "arm" ]
 	then
 		THOSTPARM="--host=$arch-linux-androideabi"
