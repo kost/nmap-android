@@ -74,7 +74,8 @@ do
 	fi
 
 	NDKARCHPATH=$NDKARCHPPREFIX-$arch
-	$NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --stl libc++ --force --install-dir $NDKARCHPATH
+	# $NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --stl libc++ --force --install-dir $NDKARCHPATH
+	$NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --force --install-dir $NDKARCHPATH
 	if [ $? -eq 0 ]; then
 		echo "[i] Successful copying of standalone toolchain"
 	else
