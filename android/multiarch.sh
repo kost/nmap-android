@@ -37,7 +37,7 @@ do
 		ARCHZIP="arm64-v8a"
 		NDKPLATFORM=arm64
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=no
+		SYMBOLREMOVE=yes
 	elif [ "$arch" = "mipsel" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -51,7 +51,7 @@ do
 		ARCHZIP="mips64el"
 		NDKPLATFORM=mips64
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=no
+		SYMBOLREMOVE=yes
 	elif [ "$arch" = "i686" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -66,7 +66,7 @@ do
 		OPENSSLPLATFORM=linux-x86_64
 		OPENSSLLDFLAGS=
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=no
+		SYMBOLREMOVE=yes
 	else
 		THOSTPARM="--host=$arch-linux-android"
 		TPREFIXT="$arch-linux-android"
