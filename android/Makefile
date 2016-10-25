@@ -10,7 +10,7 @@ NDK?=/tmp/android-ndk-r11c
 NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKLEVEL?=9
 NDKPLATFORM?=android-$(NDKLEVEL)
-ANDROIDDEST?=/sdcard/opt/nmap-7.30
+ANDROIDDEST?=/sdcard/opt/nmap-7.31
 OPENSSLPLATFORM?=dist
 OPENSSLLDFLAGS?="-static"
 
@@ -28,12 +28,12 @@ TMPNDK=/tmp/ndk.tar.bz2
 TMPDIREXTRACT=/tmp
 
 NDKCP=$(NDK)/build/tools/make_standalone_toolchain.py --arch $(HOSTARCH) --api $(NDKLEVEL) --stl libc++ --force --install-dir=$(NDKDEST) 
-NDKURL="https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip"
+NDKURL="https://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip"
 
 all:
 	@echo "Type 'make doit' to automatically download Android NDK and build"
 	@echo "Type 'make havendk' to build automatically if you have NDK (check Makefile!)"
-	@echo "For example: make havendk NDK=/data/opt/android-ndk-r12"
+	@echo "For example: make havendk NDK=/data/opt/android-ndk-r11"
 
 doit: | getndk havendk
 	@echo "Type 'doit' successfuly built"
