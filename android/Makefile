@@ -6,16 +6,16 @@ HOSTPARM?="--host=arm-linux-androideabi"
 #PREFIXT="i686-linux-android"
 PREFIXT?="arm-linux-androideabi"
 # edit line below if you have NDK to reflect the path where NDK is installed
-NDK?=/tmp/android-ndk-r12b
+NDK?=/tmp/android-ndk-r11c
 NDKDEST?=/tmp/ndk-$(HOSTARCH)
 NDKLEVEL?=9
 NDKPLATFORM?=android-$(NDKLEVEL)
-ANDROIDDEST?=/sdcard/opt/nmap-7.25BETA1
+ANDROIDDEST?=/sdcard/opt/nmap-7.30
 OPENSSLPLATFORM?=dist
 OPENSSLLDFLAGS?="-static"
 
 ifdef OPENSSL
-OPENSSLVER?=openssl-1.0.2h
+OPENSSLVER?=openssl-1.0.2j
 OPENSSLURL?="https://openssl.org/source/$(OPENSSLVER).tar.gz"
 OPENSSLDIR?=/sdcard/opt-$(HOSTARCH)/$(OPENSSLVER)
 OPENSSLOPT?="--with-openssl=$(OPENSSLDIR)"

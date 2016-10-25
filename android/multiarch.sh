@@ -3,9 +3,9 @@
 set -x
 
 ANDROIDDIR=/sdcard/opt
-ANDROIDNMAP=nmap-7.25BETA2
+ANDROIDNMAP=nmap-7.30
 NDKARCHPPREFIX=/data/opt/ndk
-NDKPATH=/data/opt/android-ndk-r12b
+NDKPATH=/data/opt/android-ndk-r11c
 CURDIR=`pwd`
 NDK32LEVEL=21
 NDK64LEVEL=21
@@ -24,7 +24,7 @@ do
 	OPENSSLLDFLAGS="-static"
 	NDKLEVEL=$NDK32LEVEL
 	NDKPLATFORM=$arch
-	SYMBOLREMOVE=yes
+	SYMBOLREMOVE=no
 	if [ "$arch" = "arm" ]
 	then
 		THOSTPARM="--host=$arch-linux-androideabi"
@@ -37,7 +37,7 @@ do
 		ARCHZIP="arm64-v8a"
 		NDKPLATFORM=arm64
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=yes
+		# SYMBOLREMOVE=no
 	elif [ "$arch" = "mipsel" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -51,7 +51,7 @@ do
 		ARCHZIP="mips64el"
 		NDKPLATFORM=mips64
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=yes
+		#SYMBOLREMOVE=yes
 	elif [ "$arch" = "i686" ]
 	then
 		THOSTPARM="--host=$arch-linux-android"
@@ -66,7 +66,7 @@ do
 		OPENSSLPLATFORM=linux-x86_64
 		OPENSSLLDFLAGS=
 		NDKLEVEL=$NDK64LEVEL
-		SYMBOLREMOVE=yes
+		#SYMBOLREMOVE=yes
 	else
 		THOSTPARM="--host=$arch-linux-android"
 		TPREFIXT="$arch-linux-android"
@@ -75,7 +75,8 @@ do
 
 	NDKARCHPATH=$NDKARCHPPREFIX-$arch
 	# $NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --stl libc++ --force --install-dir $NDKARCHPATH
-	$NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --force --install-dir $NDKARCHPATH
+	$NDKPATH/build/tools/make-standalone-toolchain.sh --platform=android-$NDKLEVEL --install-dir=$NDKARCHPATH --arch=$NDKPLATFORM
+	#$NDKPATH/build/tools/make_standalone_toolchain.py --arch $NDKPLATFORM --api $NDKLEVEL --force --install-dir $NDKARCHPATH
 	if [ $? -eq 0 ]; then
 		echo "[i] Successful copying of standalone toolchain"
 	else
